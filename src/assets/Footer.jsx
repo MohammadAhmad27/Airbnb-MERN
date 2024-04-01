@@ -5,23 +5,15 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import { Box } from '@mui/material';
 
 
-
 export default function Footer() {
     return (
         <>
 
-           <h1>Hello</h1>
+            <Box style={{ backgroundColor: "red" }}>
                 <FacebookIcon />
                 <TwitterIcon />
                 <InstagramIcon />
-            
-
-
-
-
-
-
-
+            </Box>
 
         </>
     )

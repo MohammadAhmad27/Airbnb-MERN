@@ -1,11 +1,9 @@
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from './assets/Navbar'
-import Dummy from './assets/Dummy'
 import Footer from './assets/Footer'
 import Home from './assets/Home'
 import AddNewListing from './assets/AddNewListing'
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
 
@@ -17,11 +15,9 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/addnewlisting" element={<AddNewListing />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
-      <Dummy />
-      <Home />
-      <Footer/>
+
     </>
   )
 }

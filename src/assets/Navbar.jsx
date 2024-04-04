@@ -18,14 +18,17 @@ export default function Navbar() {
                 <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${location.pathname === "/addnewlisting" ? "active" : ""}`} aria-current="page" to="/addnewlisting">Add new Listing</Link>
+                <Link className={`nav-link ${location.pathname === "/addnewlisting" ? "active" : ""}`} aria-current="page" to="/addnewlisting">Add New Listing</Link>
               </li>
             </ul>
             <Button variant="contained" sx={{mr:1}}>
               Login
             </Button>
-            <Button variant="contained">
+            <Button variant="contained" sx={{mr:1}}>
               Signup
+            </Button>
+            <Button variant="contained" >
+              LOGOUT
             </Button>
           </div>
         </div>

@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js")
+const multer = require('multer')
+const { storage } = require("./cloudConfig.js")
+const upload = multer({ storage })
 const app = express()
 const port = 8080
 
@@ -17,9 +20,22 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/airbnb');
 }
 
-app.get("/", (req, res) => {
-    res.send(`airbnb backend is listening at http://localhost:${port}`)
-})
+app.get("/", async (req, res) => {
+    const allListings = await Listing.find({});
+    res.send({ allListings });
+});
+
+app.post("/", upload.single("listing[image]"), async (req, res, next) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    const newListing = new Listing(req.body.listing);
+    newListing.image = { url, filename }
+    let savedListing = await newListing.save();
+    console.log(savedListing);
+    req.flash("success", "New listing created!");
+    res.redirect("/");
+});
+
 
 
 

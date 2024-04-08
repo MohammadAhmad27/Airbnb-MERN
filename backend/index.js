@@ -21,6 +21,16 @@ app.get("/", (req, res) => {
     res.send(`airbnb backend is listening at http://localhost:${port}`)
 })
 
+
+
+
+
+
+
+
+
+
+
 //Home Get testListing Route
 // app.get("/testListing", async (req, res) => {
 //     let sampleListing = new Listing({

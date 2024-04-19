@@ -26,14 +26,20 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", upload.single("listing[image]"), async (req, res, next) => {
-    let url = req.file.path;
-    let filename = req.file.filename;
-    const newListing = new Listing(req.body.listing);
-    newListing.image = { url, filename }
-    let savedListing = await newListing.save();
-    console.log(savedListing);
-    req.flash("success", "New listing created!");
-    res.redirect("/");
+    try {
+        if (typeof req.file !== "undefined") {
+            let url = req.file.path;
+            let filename = req.file.filename;
+            const newListing = new Listing(req.body.listing);
+            newListing.image = { url, filename }
+            let savedListing = await newListing.save();
+            console.log(savedListing);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
 });
 
 

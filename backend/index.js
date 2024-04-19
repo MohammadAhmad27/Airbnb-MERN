@@ -5,7 +5,7 @@ const multer = require('multer')
 const { storage } = require("./cloudConfig.js")
 const upload = multer({ storage })
 const app = express()
-const port = 8080
+const port = 3000
 
 //Connecting to Database
 main().then(() => {

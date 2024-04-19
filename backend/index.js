@@ -4,6 +4,7 @@ const Listing = require("./models/listing.js")
 const multer = require('multer')
 const { storage } = require("./cloudConfig.js")
 const upload = multer({ storage })
+const path = require("path")
 const app = express()
 const port = 3000
 
@@ -27,14 +28,13 @@ app.get("/", async (req, res) => {
 
 app.post("/", upload.single("listing[image]"), async (req, res, next) => {
     try {
-        if (typeof req.file !== "undefined") {
             let url = req.file.path;
             let filename = req.file.filename;
             const newListing = new Listing(req.body.listing);
             newListing.image = { url, filename }
             let savedListing = await newListing.save();
             console.log(savedListing);
-        }
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });

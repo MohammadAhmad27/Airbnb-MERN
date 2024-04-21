@@ -11,7 +11,7 @@ const path = require("path")
 const app = express()
 const port = 3000
 
-//Connecting to Database
+//Connecting to MongoDB 
 main().then(() => {
     console.log("Connected to MongoDB!");
 })
@@ -24,11 +24,13 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/airbnb');
 }
 
+//Home route where all listings are showing
 app.get("/", async (req, res) => {
     const allListings = await Listing.find({});
     res.send({ allListings });
 });
 
+//Home route where any new listing will be shown after creating
 app.post("/", upload.single("listing[image]"), async (req, res, next) => {
     try {
         let url = req.file.path;
@@ -42,15 +44,55 @@ app.post("/", upload.single("listing[image]"), async (req, res, next) => {
         console.error(error);
         res.status(500).json({ error: "Sorry, Internal server error!" });
     }
+});
 
+// Rendering/Showing Form for creating new listing
+app.get("/new",  (req, res) => {
+    console.log(req.user);
+   // res.render("new.ejs"); 
 });
 
 
+// Rendering Show listing code page
+app.get("/:id", async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    console.log(listing);
+    // res.render("show.ejs", { listing });
+});
 
 
+// Updating Listing Code
+app.put("/:id", upload.single("listing[image]"), async (req, res) => {
+    let { id } = req.params;
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename }
+        await listing.save();
+    }
+ //   res.redirect(`/listings/${id}`);
+});
 
 
+// Deleting Listing Code
+app.delete("/:id",  async (req, res) => {
+    let { id } = req.params;
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log(`Listing Deleted Successfully! ${deletedListing}`)
+   // res.redirect("/listings");
+});
 
+
+// Edit Form Code
+app.get("/:id/edit", async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    let originalImageUrl = listing.image.url;
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
+   // res.render("edit.ejs", { listing, originalImageUrl });
+});
 
 
 

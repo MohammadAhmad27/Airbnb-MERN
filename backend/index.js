@@ -25,12 +25,14 @@ async function main() {
 }
 
 //Home route where all listings are showing
+//Successfully tested using Thunder Client
 app.get("/", async (req, res) => {
     const allListings = await Listing.find({});
     res.send({ allListings });
 });
 
 //Home route where any new listing will be shown after creating
+// Not Successfully tested using Thunder Client, got some error
 app.post("/", upload.single("listing[image]"), async (req, res, next) => {
     try {
         let url = req.file.path;
@@ -47,22 +49,27 @@ app.post("/", upload.single("listing[image]"), async (req, res, next) => {
 });
 
 // Rendering/Showing Form for creating new listing
+// Successfully tested using Thunder Client
 app.get("/new",  (req, res) => {
     console.log(req.user);
+    res.send(req.user);
    // res.render("new.ejs"); 
 });
 
 
 // Rendering Show listing code page
+// Successfully tested using Thunder Client
 app.get("/:id", async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     console.log(listing);
+    res.send(listing)
     // res.render("show.ejs", { listing });
 });
 
 
 // Updating Listing Code
+// Not Successfully tested using Thunder Client, got some error
 app.put("/:id", upload.single("listing[image]"), async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
@@ -72,6 +79,8 @@ app.put("/:id", upload.single("listing[image]"), async (req, res) => {
         listing.image = { url, filename }
         await listing.save();
     }
+    console.log(listing)
+    res.send(listing);
  //   res.redirect(`/listings/${id}`);
 });
 

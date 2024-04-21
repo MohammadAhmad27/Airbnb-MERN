@@ -3,7 +3,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require("mongoose");
-var cors = require('cors') 
+var cors = require('cors')
 const Listing = require("./models/listing.js")
 const multer = require('multer')
 const { storage } = require("./cloudConfig.js")
@@ -59,10 +59,10 @@ app.post("/", upload.single("listing[image]"), async (req, res, next) => {
 
 // Rendering/Showing Form for creating new listing
 // Successfully tested using Thunder Client
-app.get("/new",  (req, res) => {
+app.get("/new", (req, res) => {
     console.log(req.user);
     res.send(req.user);
-   // res.render("new.ejs"); 
+    // res.render("new.ejs"); 
 });
 
 
@@ -90,18 +90,18 @@ app.put("/:id", upload.single("listing[image]"), async (req, res) => {
     }
     console.log(listing)
     res.send(listing);
- //   res.redirect(`/listings/${id}`);
+    //   res.redirect(`/listings/${id}`);
 });
 
 
 // Deleting Listing Code
 // Successfully tested using Thunder Client
-app.delete("/:id",  async (req, res) => {
+app.delete("/:id", async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     console.log(`Listing Deleted Successfully! ${deletedListing}`)
     res.send(deletedListing);
-   // res.redirect("/listings");
+    // res.redirect("/listings");
 });
 
 
@@ -111,7 +111,7 @@ app.get("/:id/edit", async (req, res) => {
     const listing = await Listing.findById(id);
     let originalImageUrl = listing.image.url;
     originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
-   // res.render("edit.ejs", { listing, originalImageUrl });
+    // res.render("edit.ejs", { listing, originalImageUrl });
 });
 
 
@@ -143,7 +143,59 @@ app.get("/:id/edit", async (req, res) => {
 
 
 
+//Rendering Signup Form
+app.get("/signup", (req, res) => {
+    // res.render("users/signup.ejs");
+});
 
+
+
+// After entering data redirect to all listings page
+app.post("/signup", async (req, res) => {
+    try {
+        let { username, email, password } = req.body;
+        const newUser = new User({ email, username });
+        const registeredUser = await User.register(newUser, password);
+        console.log(registeredUser);
+        req.login(registeredUser, (err) => {
+            if (err) {
+                return next(err);
+            }
+            // req.flash("success", "Welcome to wanderlust!");
+            // res.redirect("/listings");
+        });
+    } catch (error) {
+        console.log(error.message);
+        res.send(error);
+    }
+});
+
+
+//Rendering Login Form
+app.get("/login",(req, res) => {
+    // res.render("users/login.ejs");
+});
+
+
+// After entering data redirect to all listings page
+app.post("/login",async (req, res) => {
+    req.flash("success", "Welcome back to wanderlust! You're logged in");
+    let redirectUrl = res.locals.redirectUrl || "/listings";
+    res.redirect(redirectUrl);
+});
+
+
+
+// Logout 
+app.get("/logout",(req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.flash("success", "You're logged out!");
+        res.redirect("/listings");
+    });
+    });
 
 
 

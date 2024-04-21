@@ -21,15 +21,23 @@ export default function Navbar() {
                 <Link className={`nav-link ${location.pathname === "/addnewlisting" ? "active" : ""}`} aria-current="page" to="/addnewlisting">Add New Listing</Link>
               </li>
             </ul>
+            <Link to="/login">
             <Button variant="contained" sx={{mr:1}}>
               Login
             </Button>
+            </Link>
+
+            <Link to="/signup">
             <Button variant="contained" sx={{mr:1}}>
               Signup
             </Button>
+            </Link>
+
+            <Link to="/logout">
             <Button variant="contained" >
               LOGOUT
             </Button>
+            </Link>
           </div>
         </div>
       </nav>

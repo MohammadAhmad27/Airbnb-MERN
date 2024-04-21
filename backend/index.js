@@ -3,10 +3,12 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require("mongoose");
+var cors = require('cors') 
 const Listing = require("./models/listing.js")
 const multer = require('multer')
 const { storage } = require("./cloudConfig.js")
 const upload = multer({ storage })
+const methodOverride = require("method-override")
 const path = require("path")
 const app = express()
 const port = 3000
@@ -23,6 +25,13 @@ async function main() {
     // await mongoose.connect(dbUrl);
     await mongoose.connect('mongodb://127.0.0.1:27017/airbnb');
 }
+
+// Using cors to connect Frontend with Backend and running both servers together (npm run both)
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+
 
 //Home route where all listings are showing
 //Successfully tested using Thunder Client

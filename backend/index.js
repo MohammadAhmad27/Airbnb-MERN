@@ -186,18 +186,6 @@ app.post("/login",async (req, res) => {
 
 
 
-// Logout 
-app.get("/logout",(req, res) => {
-    req.logout((err) => {
-        if (err) {
-            return next(err);
-        }
-        req.flash("success", "You're logged out!");
-        res.redirect("/listings");
-    });
-    });
-
-
 
 //Listening on port 8080
 app.listen(port, () => {

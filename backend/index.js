@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 
-
+// Requiring listing.js & user.js from routes folder
 app.use("/listings", listingRouter);
 app.use("/", userRouter);
 

@@ -2,13 +2,11 @@ import React from 'react'
 
 
 export default function Home() {
+
+
   return (
     <>
-
-
-
-{/* 
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    {/* <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         for (let listing of allListings) { 
             <a href="/listings/{listing._id}" class="listing-link">
                 <div class="card listing-card">
@@ -26,11 +24,29 @@ export default function Home() {
                 </div>
             </a>
              } 
-    </div>
- */}
-
-    
-
+    </div> */}
     </>
   )
 }
+
+
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+
+// function App() {
+//   const [message, setMessage] = useState("");
+
+//   useEffect(() => {
+//     fetch("http://localhost:3000/message")
+//       .then((res) => res.json())
+//       .then((data) => setMessage(data.message));
+//   }, []);
+
+//   return (
+//     <div className="App">
+//       <h1>{message}</h1>
+//     </div>
+//   );
+// }
+
+// export default App

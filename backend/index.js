@@ -5,6 +5,7 @@ const express = require('express')
 const mongoose = require("mongoose");
 var cors = require('cors')
 const listingRouter = require("./routes/listing.js")
+const userRouter = require("./routes/user.js")
 const methodOverride = require("method-override")
 const path = require("path")
 const app = express()
@@ -32,18 +33,13 @@ app.use(methodOverride("_method"));
 
 
 app.use("/listings", listingRouter);
+app.use("/", userRouter);
 
 
 
 
-
-
-
-
-
-
-//Code to save testing listing in MongoDB 
-// app.get("/testListing", async (req, res) => {
+//Code to save sample listing in MongoDB 
+// app.get("/samplelisting", async (req, res) => {
 //     let sampleListing = new Listing({
 //         title: "Cozy Beachfront Cottage",
 //         description: "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
@@ -64,51 +60,6 @@ app.use("/listings", listingRouter);
 //         });
 //     res.send("Successful testing");
 // });
-
-
-
-//Rendering Signup Form
-app.get("/signup", (req, res) => {
-    // res.render("users/signup.ejs");
-});
-
-
-
-// After entering data redirect to all listings page
-app.post("/signup", async (req, res) => {
-    try {
-        let { username, email, password } = req.body;
-        const newUser = new User({ email, username });
-        const registeredUser = await User.register(newUser, password);
-        console.log(registeredUser);
-        req.login(registeredUser, (err) => {
-            if (err) {
-                return next(err);
-            }
-            // req.flash("success", "Welcome to wanderlust!");
-            // res.redirect("/listings");
-        });
-    } catch (error) {
-        console.log(error.message);
-        res.send(error);
-    }
-});
-
-
-//Rendering Login Form
-app.get("/login",(req, res) => {
-    // res.render("users/login.ejs");
-});
-
-
-// After entering data redirect to all listings page
-app.post("/login",async (req, res) => {
-    req.flash("success", "Welcome back to wanderlust! You're logged in");
-    let redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-});
-
-
 
 
 //Listening on port 8080

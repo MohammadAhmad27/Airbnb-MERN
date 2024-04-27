@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <>
 
-            <Box className="text-center fixed-bottom" style={{ backgroundColor: "#ebebeb", height: "8.25rem" }}>
+            <footer className="text-center" style={{ backgroundColor: "#ebebeb", height: "8.25rem" }}>
                 <FacebookIcon className='socialMedia-Icons' />
                 <TwitterIcon className='socialMedia-Icons' />
                 <InstagramIcon className='socialMedia-Icons' />
@@ -20,7 +20,7 @@ export default function Footer() {
                     <LanguageIcon className='globe' /> <b>English(US)</b>
                     <AttachMoneyIcon className='dollar' /><b>USD</b>
                 </div>
-            </Box>
+            </footer>
 
 
         </>

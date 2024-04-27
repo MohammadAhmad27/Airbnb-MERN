@@ -1,11 +1,32 @@
 import React from 'react'
-
+import Header from './Header'
 
 export default function Home() {
 
 
   return (
     <>
+      <Header/>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      <h1>Airbnb</h1>
+      
+
     {/* <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         for (let listing of allListings) { 
             <a href="/listings/{listing._id}" class="listing-link">

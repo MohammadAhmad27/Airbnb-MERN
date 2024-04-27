@@ -17,7 +17,7 @@ import SailingIcon from '@mui/icons-material/Sailing';
 export default function Header() {
   return (
     <>
-<div id="filters">
+<header id="filters">
         <div className="filter">
           <LocalFireDepartmentIcon />
           {/* <div><i className="fa-solid fa-fire"></i></div> */}
@@ -80,7 +80,7 @@ export default function Header() {
             <label className="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
           </div>
         </div>
-      </div>
+      </header>
 
 
 

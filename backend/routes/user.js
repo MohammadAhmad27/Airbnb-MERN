@@ -10,6 +10,7 @@ const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET = 'Ahmadisagoodb$oy';
 
 // ROUTE 1: Create a New User using: POST "/api/auth/createuser". No login required
+//Successfully tested using Thunder Client
 router.post('/createuser', [
   body('name', 'Enter a valid name').isLength({ min: 3 }),
   body('email', 'Enter a valid email').isEmail(),
@@ -19,13 +20,13 @@ router.post('/createuser', [
   // If there are errors, return Bad request and the errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({success, errors: errors.array() });
+    return res.status(400).json({ success, errors: errors.array() });
   }
   try {
     // Check whether the user with this email exists already
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({success, error: "Sorry a user with this email already exists" })
+      return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
     }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
@@ -46,7 +47,7 @@ router.post('/createuser', [
 
     // res.json(user)
     success = true;
-    res.json({success, authtoken })
+    res.json({ success, authtoken })
 
   } catch (error) {
     console.error(error.message);
@@ -56,6 +57,7 @@ router.post('/createuser', [
 
 
 // ROUTE 2: Authenticate an Existing User using: POST "/api/auth/login". No login required
+//Successfully tested using Thunder Client
 router.post('/login', [
   body('email', 'Enter a valid email').isEmail(),
   body('password', 'Password cannot be blank').exists(),
@@ -100,10 +102,11 @@ router.post('/login', [
 
 
 // ROUTE 3: Get Existing User Details using: POST "/api/auth/getuser". Login required
-router.post('/getuser', fetchUser,  async (req, res) => {
+//Successfully tested using Thunder Client
+router.post('/getuser', fetchUser, async (req, res) => {
 
   try {
-   let userId = req.user.id;
+    let userId = req.user.id;
     const user = await User.findById(userId).select("-password")
     res.send(user)
   } catch (error) {

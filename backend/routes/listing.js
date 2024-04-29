@@ -35,11 +35,11 @@ router.post("/", fetchUser, [
         // let url = req.file.path;
         // let filename = req.file.filename;
         const { title, description, image, price, location, country } = req.body;
-          // If there are errors, return Bad request and the errors
-          const errors = validationResult(req);
-          if (!errors.isEmpty()) {
-              return res.status(400).json({ errors: errors.array() });
-          }
+        // If there are errors, return Bad request and the errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const newListing = new Listing({
             title, description, image, price, location, country, user: req.user.id
         });

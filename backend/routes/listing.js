@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-//Home route where any new listing will be shown after creating
+//Home route where new listing will be shown after creating
 //Successfully tested using Thunder Client
 //upload.single("listing[image]")
 router.post("/", fetchUser, async (req, res, next) => {
@@ -70,6 +70,7 @@ router.get("/:id", async (req, res) => {
 // Updating Listing Code
 // Successfully tested using Thunder Client, got some error
 router.put("/:id", fetchUser, async (req, res) => {
+    const { title, description, price, image, location, country } = req.body;
     try {
         // Create a newListing object
         const newListing = {};
@@ -81,17 +82,17 @@ router.put("/:id", fetchUser, async (req, res) => {
         if (country) { newListing.country = country };
 
         // Find the listing to be updated and update it
-        let listing = await Listing.findById(req.params.id);
-        if (!listing) { return res.status(404).send("Not Found") }
+        let updatedListing = await Listing.findById(req.params.id);
+        if (!updatedListing) { return res.status(404).send("Not Found") }
 
-        if (listing.user.toString() !== req.user.id) {
+        if (updatedListing.user.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
-        listing = await Listing.findByIdAndUpdate(req.params.id, { $set: newListing }, { new: true })
-        res.json({ listing });
-        // await listing.save();
-        console.log(listing)
-        res.send(listing);
+        updatedListing = await Listing.findByIdAndUpdate(req.params.id, { $set: newListing }, { new: true })
+        // res.json({ listing });
+        await updatedListing.save();
+        console.log(updatedListing)
+        res.send(updatedListing);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Sorry, Internal server error!" });
@@ -102,12 +103,19 @@ router.put("/:id", fetchUser, async (req, res) => {
 
 // Deleting Listing Code
 // Successfully tested using Thunder Client
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", fetchUser, async (req, res) => {
     try {
+        // Find the listing to be delete and delete it
         let { id } = req.params;
-        let deletedListing = await Listing.findByIdAndDelete(id);
-        console.log(`Listing Deleted Successfully! ${deletedListing}`)
-        res.send(deletedListing);
+        let deletedListing = await Listing.findById(id);
+        if (!deletedListing) { return res.status(404).send("Not Found") }
+        // Allow deletion only if user owns this Note
+        if (deletedListing.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+        //delete via id
+        deletedListing = await Listing.findByIdAndDelete(id)
+        res.send({ "Success": "Lisitng has been deleted", deletedListing: deletedListing });
         // res.redirect("/listings");
     }
     catch (error) {

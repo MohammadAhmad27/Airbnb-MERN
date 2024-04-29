@@ -31,7 +31,7 @@ export default function Home() {
         for (let listing of allListings) { 
             <a href="/listings/{listing._id}" class="listing-link">
                 <div class="card listing-card">
-                    <img src="{listing.image.url}" class="card-img-top" alt="listing" style="height: 20rem;"/>
+                    <img src="{listing.image}" class="card-img-top" alt="listing" style="height: 20rem;"/>
                     <div class="card-img-overlay">maaanaaa</div>
                     <div class="card-body">
                         <p class="card-text">

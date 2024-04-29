@@ -7,8 +7,7 @@ export default function AddNewListing() {
         <div className="col-8 offset-2">
             <br/> <br/>
             <h2 className="mb-3">Create a new Lisiting</h2>
-            <form method="post" action="/listings" className="needs-validation" novalidate
-                enctype="multipart/form-data">
+            <form method="post" action="/listings" className="needs-validation" novalidate>
 
                 <div className="mb-3">
                     <label for="title" className="form-label">Title</label>
@@ -27,15 +26,15 @@ export default function AddNewListing() {
                         Please enter short description!
                     </div>
                 </div>
-                 {/* <div className="mb-3">
+                 <div className="mb-3">
                     <label for="image" className="form-label">Image Link</label>
                     <input name="listing[image]" placeholder="Enter image URL/Link" type="text"
                         className="form-control"/>
-                </div> */}
-                <div className="mb-3">
+                </div>
+                {/* <div className="mb-3">
                     <label for="image" className="form-label">Uploading Listing Image</label>
                     <input name="listing[image]" type="file" className="form-control" required />
-                </div>
+                </div> */}
                 <div className="row">
                     <div className="mb-3 col-md-4">
                         <label for="price" className="form-label">Price</label>

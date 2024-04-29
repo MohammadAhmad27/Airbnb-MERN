@@ -3,28 +3,38 @@ const router = express.Router();
 const Listing = require("../models/listing.js")
 const fetchUser = require('../middleware/fetchUser');
 const { body, validationResult } = require('express-validator');
-const multer = require('multer')
-const { storage } = require("../cloudConfig.js")
-const upload = multer({ storage })
+// const multer = require('multer')
+// const { storage } = require("../cloudConfig.js")
+// const upload = multer({ storage })
 
 
 //Home route where all listings are showing
 //Successfully tested using Thunder Client
 router.get("/", async (req, res) => {
-    const allListings = await Listing.find({});
-    res.send({ allListings });
+    try {
+        const allListings = await Listing.find({});
+        res.send({ allListings });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Sorry, Internal server error!" });
+    }
 });
 
 //Home route where any new listing will be shown after creating
-// Not Successfully tested using Thunder Client, got some error
-router.post("/", upload.single("listing[image]"), async (req, res, next) => {
+//Successfully tested using Thunder Client
+//upload.single("listing[image]")
+router.post("/", fetchUser, async (req, res, next) => {
     try {
-        let url = req.file.path;
-        let filename = req.file.filename;
-        const newListing = new Listing(req.body.listing);
-        newListing.image = { url, filename }
+        // let url = req.file.path;
+        // let filename = req.file.filename;
+        const { title, description, image, price, location, country } = req.body;
+        const newListing = new Listing({
+            title, description, image, price, location, country, user: req.user.id
+        });
+        // newListing.image = { url, filename }
         let savedListing = await newListing.save();
         console.log(savedListing);
+        res.send(savedListing);
 
     } catch (error) {
         console.error(error);
@@ -44,39 +54,66 @@ router.get("/new", (req, res) => {
 // Rendering Show listing code page
 // Successfully tested using Thunder Client
 router.get("/:id", async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    console.log(listing);
-    res.send(listing)
-    // res.render("show.ejs", { listing });
+    try {
+        let { id } = req.params;
+        const listing = await Listing.findById(id);
+        console.log(listing);
+        res.send(listing)
+        // res.render("show.ejs", { listing });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Sorry, Internal server error!" });
+    }
 });
 
 
 // Updating Listing Code
-// Not Successfully tested using Thunder Client, got some error
-router.put("/:id", upload.single("listing[image]"), async (req, res) => {
-    let { id } = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    if (typeof req.file !== "undefined") {
-        let url = req.file.path;
-        let filename = req.file.filename;
-        listing.image = { url, filename }
-        await listing.save();
+// Successfully tested using Thunder Client, got some error
+router.put("/:id", fetchUser, async (req, res) => {
+    try {
+        // Create a newListing object
+        const newListing = {};
+        if (title) { newListing.title = title };
+        if (description) { newListing.description = description };
+        if (image) { newListing.image = image };
+        if (price) { newListing.price = price };
+        if (location) { newListing.location = location };
+        if (country) { newListing.country = country };
+
+        // Find the listing to be updated and update it
+        let listing = await Listing.findById(req.params.id);
+        if (!listing) { return res.status(404).send("Not Found") }
+
+        if (listing.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+        listing = await Listing.findByIdAndUpdate(req.params.id, { $set: newListing }, { new: true })
+        res.json({ listing });
+        // await listing.save();
+        console.log(listing)
+        res.send(listing);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Sorry, Internal server error!" });
     }
-    console.log(listing)
-    res.send(listing);
-    //   res.redirect(`/listings/${id}`);
+
 });
 
 
 // Deleting Listing Code
 // Successfully tested using Thunder Client
 router.delete("/:id", async (req, res) => {
-    let { id } = req.params;
-    let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(`Listing Deleted Successfully! ${deletedListing}`)
-    res.send(deletedListing);
-    // res.redirect("/listings");
+    try {
+        let { id } = req.params;
+        let deletedListing = await Listing.findByIdAndDelete(id);
+        console.log(`Listing Deleted Successfully! ${deletedListing}`)
+        res.send(deletedListing);
+        // res.redirect("/listings");
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Sorry, Internal server error!" });
+    }
 });
 
 

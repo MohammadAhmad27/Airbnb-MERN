@@ -23,11 +23,23 @@ router.get("/", async (req, res) => {
 //Home route where new listing will be shown after creating
 //Successfully tested using Thunder Client
 //upload.single("listing[image]")
-router.post("/", fetchUser, async (req, res, next) => {
+router.post("/", fetchUser, [
+    body('title', 'Enter a valid title').isLength({ min: 5 }),
+    body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),
+    body('image', 'Image URL must be more than 15 characters').isLength({ min: 15 }),
+    body('price', 'Price must be atleast 2 characters').isLength({ min: 2 }),
+    body('location', 'Location must be atleast 3 characters').isLength({ min: 3 }),
+    body('country', 'Description must be atleast 3 characters').isLength({ min: 3 })
+], async (req, res, next) => {
     try {
         // let url = req.file.path;
         // let filename = req.file.filename;
         const { title, description, image, price, location, country } = req.body;
+          // If there are errors, return Bad request and the errors
+          const errors = validationResult(req);
+          if (!errors.isEmpty()) {
+              return res.status(400).json({ errors: errors.array() });
+          }
         const newListing = new Listing({
             title, description, image, price, location, country, user: req.user.id
         });

@@ -1,14 +1,20 @@
 import React from 'react'
 import Button from '@mui/material/Button';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    props.showAlert("Logged out Successfully!", "success");
+    navigate("/login");
+  }
   let location = useLocation();
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/"><img src="brand.png" alt="navbar-brand" style={{width: '85px'}} /></Link>
+          <Link className="navbar-brand" to="/"><img src="brand.png" alt="navbar-brand" style={{ width: '85px' }} /></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -21,23 +27,12 @@ export default function Navbar() {
                 <Link className={`nav-link ${location.pathname === "/addnewlisting" ? "active" : ""}`} aria-current="page" to="/addnewlisting">Add New Listing</Link>
               </li>
             </ul>
-            <Link to="/login">
-            <Button variant="contained" sx={{mr:1}}>
-              Login
-            </Button>
-            </Link>
 
-            <Link to="/signup">
-            <Button variant="contained" sx={{mr:1}}>
-              Signup
-            </Button>
-            </Link>
+            {!localStorage.getItem('token') ? <>
+              <Link to="/login"><Button variant="contained" sx={{ mr: 1 }}>Login</Button></Link>
+              <Link to="/signup"><Button variant="contained" >Signup</Button></Link>
+            </> : <Link to="/logout" onClick={handleLogout}><Button variant="contained" >LOGOUT</Button></Link>}
 
-            <Link to="/logout">
-            <Button variant="contained" >
-              LOGOUT
-            </Button>
-            </Link>
           </div>
         </div>
       </nav>

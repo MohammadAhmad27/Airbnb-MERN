@@ -4,11 +4,11 @@ import Navbar from './assets/Navbar'
 import Footer from './assets/Footer'
 import Home from './assets/Home'
 import AddNewListing from './assets/AddNewListing'
-import ListingState from './context/ListingState';
-import Alert from './assets/Alert';
+import ListingState from './context/ListingState'
+import Alert from './assets/Alert'
 import Login from './assets/Login'
 import Signup from './assets/Signup'
-import { useState } from 'react';
+import { useState } from 'react'
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -26,6 +26,7 @@ function App() {
       <ListingState>
         <Router>
           <Navbar showAlert={showAlert} />
+          <div style={{ marginTop: "57px" }}></div>
           <Alert alert={alert} />
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert} />} />

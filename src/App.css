@@ -1,6 +1,5 @@
 /* Header */
 #filters {
-    margin-top: 70px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -11,7 +10,7 @@
 .filter {
     text-align: center;
     margin-right: 2rem;
-    margin-top: 2rem;
+    margin-top: 1.25rem;
     opacity: 0.7
 }
 

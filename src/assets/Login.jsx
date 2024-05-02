@@ -33,7 +33,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className='mt-2'>
+    <div className='container mt-2'>
       <h2>Login to Continue to Airbnb</h2>
       <form onSubmit={handleSubmit}>
         <div className="my-3">

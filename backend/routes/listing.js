@@ -82,7 +82,7 @@ router.get("/:id", async (req, res) => {
 // Updating Listing Code
 // Successfully tested using Thunder Client, got some error
 router.put("/:id", fetchUser, async (req, res) => {
-    const { title, description, price, image, location, country } = req.body;
+    const { title, description, image, price, location, country } = req.body;
     try {
         // Create a newListing object
         const newListing = {};

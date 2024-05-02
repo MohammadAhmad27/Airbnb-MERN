@@ -31,7 +31,7 @@ export default function Navbar(props) {
             {!localStorage.getItem('token') ? <>
               <Link to="/login"><Button variant="contained" sx={{ mr: 1 }}>Login</Button></Link>
               <Link to="/signup"><Button variant="contained" >Signup</Button></Link>
-            </> : <Link to="/logout" onClick={handleLogout}><Button variant="contained" >LOGOUT</Button></Link>}
+            </> : <Link onClick={handleLogout}><Button variant="contained" >LOGOUT</Button></Link>}
 
           </div>
         </div>

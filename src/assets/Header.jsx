@@ -17,7 +17,7 @@ import SailingIcon from '@mui/icons-material/Sailing';
 export default function Header() {
   return (
     <>
-<header id="filters">
+      <header id="filters">
         <div className="filter">
           <LocalFireDepartmentIcon />
           {/* <div><i className="fa-solid fa-fire"></i></div> */}

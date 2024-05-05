@@ -77,7 +77,7 @@ export default function Header() {
         <div className="tax-toggle">
           <div className="form-check-reverse form-switch">
             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-            <label className="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Display total after taxes</label>
           </div>
         </div>
       </header>

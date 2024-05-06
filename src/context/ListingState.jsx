@@ -16,7 +16,7 @@ const ListingState = (props) => {
                 // "auth-token": localStorage.getItem('token')
             }
         });
-        const json = await response.json()
+        const json = await response.json();
         console.log("All Listings", json);
         setListings(json);
     }

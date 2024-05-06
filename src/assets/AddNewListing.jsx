@@ -26,9 +26,9 @@ export default function AddNewListing(props) {
         // Redirect to login page if user is not logged in
         if (!localStorage.getItem('token')) {
             navigate('/login');
-            props.showAlert(" Please Login to Add a Listing!", "danger")
+            props.showAlert(" Please Login to Add New Listing!", "danger")
         } else {
-            props.showAlert(" Please Add a Listing!", "success")
+            props.showAlert(" Please Add New Listing!", "success")
         }
     }, []); // Run only once when component mounts
 

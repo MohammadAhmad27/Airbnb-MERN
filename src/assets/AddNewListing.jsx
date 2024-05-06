@@ -1,5 +1,5 @@
 import e from 'cors'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import listingContext from "../context/ListingContext"
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +21,16 @@ export default function AddNewListing(props) {
     const onChange = (e) => {
         setListing({ ...listing, [e.target.name]: e.target.value });
     }
+
+
+    useEffect(() => {
+        // Redirect to login page if user is not logged in
+        if (!localStorage.getItem('token')) {
+            navigate('/login');
+        } else {
+            props.showAlert(" Please Add a Listing!", "success")
+        }
+    }, []); // Run only once when component mounts
 
     return (
         <>

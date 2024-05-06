@@ -21,7 +21,7 @@ const ListingState = (props) => {
         setListings(json)
     }
 
-    // Add a Note
+    // Add a Listing
     const addListing = async (title, description, image, price, location, country) => {
         // TODO: API Call
         // API Call 
@@ -39,7 +39,7 @@ const ListingState = (props) => {
         setListings(listings.concat(listing))
     }
 
-    // Add Show Listing Route
+    // Show Particular Listing
     const showListing = async (id) => {
         // API Call 
         const response = await fetch(`${host}/listings/${id}`, {
@@ -55,7 +55,7 @@ const ListingState = (props) => {
     }
 
 
-    // Delete a Note
+    // Delete a Listing
     const deleteListing = async (id) => {
         // API Call
         const response = await fetch(`${host}/listings/${id}`, {
@@ -66,12 +66,12 @@ const ListingState = (props) => {
             }
         });
         const json = response.json();
-        console.log("Deleted Note", json);
+        console.log("Deleted Listing", json);
         const newListings = listings.filter((listing) => { return listing._id !== id })
         setListings(newListings)
     }
 
-    // Edit a Note
+    // Edit a Listing
     const editListing = async (id, title, description, image, price, location, country) => {
         // API Call 
         const response = await fetch(`${host}/listings/${id}`, {

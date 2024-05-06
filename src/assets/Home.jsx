@@ -11,6 +11,7 @@ export default function Home(props) {
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate("/login");
+      props.showAlert(" Please login to see all Listings!", "danger")
     } else {
       getListings()
     }

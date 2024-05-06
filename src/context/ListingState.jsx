@@ -18,7 +18,7 @@ const ListingState = (props) => {
         });
         const json = await response.json()
         console.log("All Listings", json);
-        setListings(json)
+        setListings(json);
     }
 
     // Add a Listing
@@ -36,7 +36,7 @@ const ListingState = (props) => {
 
         const listing = await response.json();
         console.log("New Listing", listing);
-        setListings(listings.concat(listing))
+        setListings(listings.concat(listing));
     }
 
     // Show Particular Listing
@@ -49,9 +49,9 @@ const ListingState = (props) => {
                 // "auth-token": localStorage.getItem('token')
             }
         });
-        const json = await response.json()
+        const json = await response.json();
         console.log("Listing", json);
-        setListings(json)
+        setListings(json);
     }
 
 
@@ -67,8 +67,8 @@ const ListingState = (props) => {
         });
         const json = response.json();
         console.log("Deleted Listing", json);
-        const newListings = listings.filter((listing) => { return listing._id !== id })
-        setListings(newListings)
+        const newListings = listings.filter((listing) => { return listing._id !== id });
+        setListings(newListings);
     }
 
     // Edit a Listing
@@ -84,7 +84,7 @@ const ListingState = (props) => {
         });
         const json = await response.json();
         console.log("Edited Listing", json);
-        let newListings = JSON.parse(JSON.stringify(listings))
+        let newListings = JSON.parse(JSON.stringify(listings));
         // Logic to edit in client
         for (let index = 0; index < newListings.length; index++) {
             const element = newListings[index];

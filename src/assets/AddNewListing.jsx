@@ -14,7 +14,6 @@ export default function AddNewListing(props) {
         addListing(listing.title, listing.description, listing.image, listing.price, listing.location, listing.country);
         setListing({ title: "", description: "", image: "", price: "", location: "", country: "" });
         navigate("/");
-        console.log("Listing Added!")
         props.showAlert(" Listing Added Successfully!", "success");
     }
 
@@ -50,7 +49,7 @@ export default function AddNewListing(props) {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="image" className="form-label">Image Link</label>
-                            <input type="text" id="image" name="image" value={listing.image} onChange={onChange} placeholder="Enter image URL/Link" className="form-control" minLength={5} required />
+                            <input type="text" id="image" name="image" value={listing.image} onChange={onChange} placeholder="Enter image URL/Link" className="form-control" minLength={15} required />
                         </div>
                         {/* <div className="mb-3">
                             <label htmlFor="image" className="form-label">Uploading Listing Image</label>

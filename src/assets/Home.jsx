@@ -1,57 +1,46 @@
-import React from 'react'
-import Header from './Header'
+import Header from "./Header"
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import listingContext from "../context/ListingContext";
 
-export default function Home() {
+export default function Home(props) {
+  const context = useContext(listingContext);
+  const { listings, getListings } = context;
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate("/login");
+    } else {
+      getListings()
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
       <Header />
-     
-
-
-       {/* <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-            <% for (let listing of allListings) { %>
-                <a href="/listings/<%= listing._id %>" class="listing-link">
-                    <div class="card listing-card">
-                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing" style="height: 20rem;">
-                        <div class="card-img-overlay">maaanaaa</div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <b>
-                                    <%= listing.title %>
-                                </b>
-                                <br>
-                                &dollar;<%= listing.price.toLocaleString("en-US") %> /night
-                                    <i class="tax-info">&nbsp; +18% GST</i>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <% } %>
-        </div> */}
+      {/* <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        {Array.isArray(listings) && listings.length > 0 ? (
+          listings.map((listing) => (
+            <a href={`/listings/${listing._id}`} className="listing-link" key={listing._id}>
+              <div className="card listing-card">
+                <img src={listing.image.url} className="card-img-top" alt="listing" style={{ height: "20rem" }} />
+                <div className="card-img-overlay">maaanaaa</div>
+                <div className="card-body">
+                  <p className="card-text">
+                    <b>{listing.title}</b><br />
+                    &dollar;{listing.price.toLocaleString("en-US")} /night
+                    <i className="tax-info">&nbsp; +18% GST</i>
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))
+        ) : (
+          <h1>Hello</h1>
+        )}
+      </div> */}
     </>
-  )
+  );
 }
-
-
-// import React, { useState, useEffect } from "react";
-// import "./App.css";
-
-// function App() {
-//   const [message, setMessage] = useState("");
-
-//   useEffect(() => {
-//     fetch("http://localhost:3000/message")
-//       .then((res) => res.json())
-//       .then((data) => setMessage(data.message));
-//   }, []);
-
-//   return (
-//     <div className="App">
-//       <h1>{message}</h1>
-//     </div>
-//   );
-// }
-
-// export default App

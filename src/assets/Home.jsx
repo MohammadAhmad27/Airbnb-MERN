@@ -1,4 +1,5 @@
 import Header from "./Header"
+import Footer from './Footer'
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import listingContext from "../context/ListingContext";
@@ -42,6 +43,7 @@ export default function Home(props) {
           <h1>Hello</h1>
         )}
       </div> */}
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from './assets/Navbar'
-import Footer from './assets/Footer'
 import Home from './assets/Home'
 import AddNewListing from './assets/AddNewListing'
 import ListingState from './context/ListingState'
@@ -34,7 +33,6 @@ function App() {
             <Route exact path="/login" element={<Login showAlert={showAlert} />} />
             <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
           </Routes>
-          <Footer />
         </Router>
       </ListingState>
     </>

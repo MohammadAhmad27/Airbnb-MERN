@@ -10,7 +10,7 @@ export default function Footer() {
     return (
         <>
 
-            <footer className="text-center fixed-bottom" style={{ backgroundColor: "#ebebeb", height: "4.25rem" }}>
+            <footer className="text-center fixed-bottom" style={{ backgroundColor: "#ebebeb", height: "4.5rem" }}>
                 <FacebookIcon className='socialMedia-Icons' style={{ fontSize: 'medium' }} />
                 <TwitterIcon className='socialMedia-Icons' style={{ fontSize: 'medium' }} />
                 <InstagramIcon className='socialMedia-Icons' style={{ fontSize: 'medium' }} />

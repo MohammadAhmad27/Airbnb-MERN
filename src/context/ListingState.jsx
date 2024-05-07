@@ -17,10 +17,10 @@ const ListingState = (props) => {
             }
         });
         const json = await response.json();
-        // console.log("All Listings", json);
+        console.log("All Listings", json);
         setListings(json);
     }
-    console.log('listing val',listings)
+
 
     // Add a Listing
     const addListing = async (title, description, image, price, location, country) => {

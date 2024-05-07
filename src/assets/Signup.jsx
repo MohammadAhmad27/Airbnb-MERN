@@ -39,11 +39,11 @@ const Signup = (props) => {
       <form onSubmit={handleSubmit}>
         <div className="my-3">
           <label htmlFor="name" className="form-label">Username</label>
-          <input type="text" className="form-control" id="name" name='name' onChange={onChange} minLength={3} aria-describedby="emailHelp" />
+          <input type="text" className="form-control" id="name" name='name' onChange={onChange} minLength={3} aria-describedby="emailHelp" required />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="email" name='email' onChange={onChange} aria-describedby="emailHelp" />
+          <input type="email" className="form-control" id="email" name='email' onChange={onChange} aria-describedby="emailHelp" required />
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>

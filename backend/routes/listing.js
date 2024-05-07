@@ -27,7 +27,7 @@ router.post("/", fetchUser, [
     body('title', 'Enter a valid title').isLength({ min: 5 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),
     body('image', 'Image URL must be more than 15 characters').isLength({ min: 15 }),
-    body('price', 'Price must be atleast 2 characters').isLength({ min: 2 }),
+    body('price', 'Price must be greater than 10').isNumeric().isInt({ min: 10 }),
     body('location', 'Location must be atleast 3 characters').isLength({ min: 3 }),
     body('country', 'Description must be atleast 3 characters').isLength({ min: 3 })
 ], async (req, res, next) => {

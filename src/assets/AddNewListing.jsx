@@ -39,14 +39,14 @@ export default function AddNewListing(props) {
                     <br /> <br />
                     <h2 className="mb-3">Create a new Lisiting</h2>
                     <form onSubmit={handleSubmit}>
-
+                        
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">Title</label>
                             <input type="text" id="title" name="title" value={listing.title} onChange={onChange} placeholder="Add a catchy title" className="form-control" minLength={5} required />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <textarea type="text" id="description" cols="30" rows="10" name="description" value={listing.description} onChange={onChange} placeholder="Enter your description" className="form-control" minLength={5} required></textarea>
+                            <textarea id="description" cols="30" rows="10" name="description" value={listing.description} onChange={onChange} placeholder="Enter your description" className="form-control" required></textarea>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="image" className="form-label">Image Link</label>
@@ -59,7 +59,7 @@ export default function AddNewListing(props) {
                         <div className="row">
                             <div className="mb-3 col-md-4">
                                 <label htmlFor="price" className="form-label">Price</label>
-                                <input type="number" id="price" name="price" value={listing.price} onChange={onChange} placeholder="500" className="form-control" minLength={2} required />
+                                <input type="number" id="price" name="price" value={listing.price} onChange={onChange} placeholder="500" className="form-control" min={10} required />
                             </div>
                             <div className="mb-3 col-md-8">
                                 <label htmlFor="location" className="form-label">Location</label>

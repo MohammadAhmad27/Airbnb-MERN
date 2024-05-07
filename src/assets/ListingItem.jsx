@@ -12,14 +12,15 @@ const ListingItem = (props) => {
                     <img src={listing.image} className="card-img-top" alt="listing" style={{ height: "18rem" }} />
                     <div className="card-body">
                         <p className="card-text">
-                            <b>{listing.title}</b><br />
+                            <b>{listing.title}</b>
+                            <br />
                             ${listing.price.toLocaleString("en-US")} /night
                         </p>
                     </div>
                 </div>
             </Link>
-
         </div>
+
     );
 };
 

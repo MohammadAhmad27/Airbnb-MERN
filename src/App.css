@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-left: 17rem;
+    margin-left: 25rem;
     width: 77rem;
 }
 
@@ -23,19 +23,6 @@
     font-size: 0.8rem;
 }
 
-.tax-info {
-    display: none;
-}
-
-.tax-toggle {
-    border: 1px solid black;
-    border-radius: 1rem;
-    height: 3rem;
-    padding: 1rem;
-    margin-left: 2rem;
-    display: flex;
-    align-items: center;
-}
 
 /* Footer */
 .socialMedia-Icons {

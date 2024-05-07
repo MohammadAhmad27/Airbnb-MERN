@@ -39,7 +39,7 @@ export default function AddNewListing(props) {
                     <br /> <br />
                     <h2 className="mb-3">Create a new Lisiting</h2>
                     <form onSubmit={handleSubmit}>
-                        
+
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">Title</label>
                             <input type="text" id="title" name="title" value={listing.title} onChange={onChange} placeholder="Add a catchy title" className="form-control" minLength={5} required />
@@ -71,7 +71,9 @@ export default function AddNewListing(props) {
                             <input type="text" id="country" name="country" value={listing.country} onChange={onChange} placeholder="Switzerland" className="form-control" minLength={3} required />
                         </div>
 
-                        <button className="btn btn-danger mt-3">Add</button>
+                        <button
+                            disabled={listing.title.length < 5 || listing.description.length < 5 || listing.image.length < 15 || listing.price.length < 2 || listing.location.length < 3 || listing.country.length < 3}
+                            className="btn btn-danger mt-3">Add</button>
                         <br /><br />
                     </form>
                 </div>

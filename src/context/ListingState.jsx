@@ -2,9 +2,9 @@ import ListingContext from "./ListingContext";
 import { useState } from "react";
 
 const ListingState = (props) => {
-    const host = "http://localhost:8000"
-    const listingInitial = []
-    const [listings, setListings] = useState(listingInitial)
+    const host = "http://localhost:8000";
+    const listingInitial = [];
+    const [listings, setListings] = useState(listingInitial);
 
     // Get all Listings
     const getListings = async () => {
@@ -17,9 +17,10 @@ const ListingState = (props) => {
             }
         });
         const json = await response.json();
-        console.log("All Listings", json);
+        // console.log("All Listings", json);
         setListings(json);
     }
+    console.log('listing val',listings)
 
     // Add a Listing
     const addListing = async (title, description, image, price, location, country) => {

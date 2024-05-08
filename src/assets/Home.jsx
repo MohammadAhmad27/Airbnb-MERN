@@ -10,7 +10,6 @@ export default function Home(props) {
   const navigate = useNavigate();
   const { listings, getListings } = context;
 
-  console.log('context', context);
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate("/login");
@@ -21,7 +20,6 @@ export default function Home(props) {
     // eslint-disable-next-line
   }, []);
 
-  console.log("Listings length:", listings.allListings);
   return (
     <>
       <Header />

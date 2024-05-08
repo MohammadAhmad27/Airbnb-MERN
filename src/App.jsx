@@ -8,7 +8,7 @@ import Alert from './assets/Alert'
 import Login from './assets/Login'
 import Signup from './assets/Signup'
 import { useState } from 'react'
-import ShowListing from './assets/ShowListing'
+import ListingPage from './assets/ListingPage'
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert} />} />
             <Route exact path="/addnewlisting" element={<AddNewListing showAlert={showAlert} />} />
-            <Route exact path="/showlisting" element={<ShowListing showAlert={showAlert} />} />
+            <Route exact path="/showlisting/:id" element={<ListingPage showAlert={showAlert} />} />
             <Route exact path="/login" element={<Login showAlert={showAlert} />} />
             <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
           </Routes>

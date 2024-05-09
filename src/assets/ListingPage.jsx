@@ -73,7 +73,7 @@ const ListingPage = (props) => {
         <div className="card col-6 offset-3 show-card listing-card">
           <img src={listing.image} className="card-img-top show-img" alt="listing" />
           <div className="card-body">
-            <p className="card-text">{listing.description}</p>
+            <p className="card-text mt-2">{listing.description}</p>
             <p className="card-text">${listing.price.toLocaleString("en-US")}</p>
             <p className="card-text">{listing.location}</p>
             <p className="card-text">{listing.country}</p>

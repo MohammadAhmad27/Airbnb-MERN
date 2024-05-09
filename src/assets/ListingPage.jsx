@@ -4,21 +4,23 @@ import listingContext from '../context/ListingContext';
 
 const ListingPage = () => {
   const { id } = useParams(); // Get the dynamic parameter from the URL
-  console.log(id);
+  console.log("Listing ID:", id); // Log the id to ensure it's correct
   const context = useContext(listingContext);
   const { showListing } = context;
   const [listing, setListing] = useState(null);
 
   useEffect(() => {
-    // Call the showListing function with the obtained id
-
-    showListing(id).then((data) => {
-      console.log("Listing Data:", data); // Log the data received from showListing
-      setListing(data);
-    }).catch(error => {
-      console.error("Error fetching listing:", error); // Log any errors that occur
-    });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const data = await showListing(id);
+        console.log("Listing Data:", data); // Log the data received from showListing
+        setListing(data);
+      } catch (error) {
+        console.error("Error fetching listing:", error); // Log any errors that occur
+      }
+    };
+    fetchData();
+  }, [id]);
 
   if (!listing) return <div>Loading...</div>;
 

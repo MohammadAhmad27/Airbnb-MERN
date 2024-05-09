@@ -14,7 +14,7 @@ export default function Navbar(props) {
     <>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/"><img src="brand.png" alt="navbar-brand" style={{ width: '85px' }} /></Link>
+          <Link className="navbar-brand" to="/"><img src="https://picjj.com/images/2024/05/09/s5uHu.png" alt="navbar-brand" style={{ width: '85px' }} /></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

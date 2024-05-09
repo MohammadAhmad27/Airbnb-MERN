@@ -52,6 +52,7 @@ const showListing = async (id) => {
         });
         const json = await response.json();
         console.log("Listing", json);
+        // setListings(json);
         return json; // Return the specific listing data
 }
 

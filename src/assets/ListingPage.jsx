@@ -5,13 +5,15 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
+import { useNavigate } from "react-router-dom";
 
-const ListingPage = () => {
+const ListingPage = (props) => {
   const { id } = useParams(); // Get the dynamic parameter from the URL
   console.log("Listing ID:", id); // Log the id to ensure it's correct
   const context = useContext(listingContext);
-  const { showListing } = context;
+  const { showListing, deleteListing } = context;
   const [listing, setListing] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +49,11 @@ const ListingPage = () => {
 
       <div className='offset-3'>
         <Stack direction="row" spacing={5} >
-          <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
+          <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => {
+            deleteListing(listing._id);
+            props.showAlert('Listing Deleted Successfully!', 'success');
+            navigate("/");
+          }}>
             Delete
           </Button>
           <Button variant="contained" color="error" endIcon={<EditIcon />}>

@@ -37,7 +37,7 @@ export default function AddNewListing(props) {
             <div className="row">
                 <div className="col-8 offset-2">
                     <br /> <br />
-                    <h2 className="mb-3">Create a new Lisiting</h2>
+                    <h2 className="mb-3">Create a New Listing</h2>
                     <form onSubmit={handleSubmit}>
 
                         <div className="mb-3">

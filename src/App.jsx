@@ -10,6 +10,7 @@ import Login from './assets/Login'
 import Signup from './assets/Signup'
 import ListingPage from './assets/ListingPage'
 import Edit from './assets/Edit'
+import NotFound from './assets/NotFound'
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -36,6 +37,8 @@ function App() {
             <Route exact path="/editlisting/:id" element={<Edit showAlert={showAlert} />} />
             <Route exact path="/login" element={<Login showAlert={showAlert} />} />
             <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
+            {/* Wildcard route for handling all other routes */}
+            <Route path="*" element={<NotFound showAlert={showAlert} />} />
           </Routes>
         </Router>
       </ListingState>

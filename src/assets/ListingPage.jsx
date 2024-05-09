@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import listingContext from '../context/ListingContext';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Stack from '@mui/material/Stack';
 
 const ListingPage = () => {
   const { id } = useParams(); // Get the dynamic parameter from the URL
@@ -24,9 +28,9 @@ const ListingPage = () => {
   if (!listing) return <div>Loading...</div>;
 
   return (
-    <div>
-      <div className="row mt-3">
-        <div className="col-8 offset-3 mt-3">
+    <>
+      <div className="row">
+        <div className="col-8 offset-3">
           <h3>{listing.title}</h3>
         </div>
         <div className="card col-6 offset-3 show-card listing-card">
@@ -39,7 +43,20 @@ const ListingPage = () => {
           </div>
         </div>
       </div>
-    </div>
+
+
+      <div className='offset-3'>
+        <Stack direction="row" spacing={5} >
+          <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
+            Delete
+          </Button>
+          <Button variant="contained" color="error" endIcon={<EditIcon />}>
+            Edit
+          </Button>
+        </Stack>
+      </div>
+
+    </>
   );
 };
 

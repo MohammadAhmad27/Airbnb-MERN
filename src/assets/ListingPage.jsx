@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListingPage = (props) => {
   const { id } = useParams(); // Get the dynamic parameter from the URL
@@ -15,6 +15,8 @@ const ListingPage = (props) => {
   const [listing, setListing] = useState(null);
   const navigate = useNavigate();
 
+
+  //Fetching listing 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +37,7 @@ const ListingPage = (props) => {
     )
   }
 
-
+  //Authentication to display DELETE & EDIT buttons only to owner of that lisitng
   const isOwner = () => {
     const token = localStorage.getItem('token');
     console.log('token', token);
@@ -92,9 +94,10 @@ const ListingPage = (props) => {
             </Button>
           )}
           {isOwner() && (
-            <Button variant="contained" color="error" endIcon={<EditIcon />}>
+            <Link to={`/editlisting/${listing._id}`}><Button variant="contained" color="error" endIcon={<EditIcon />}>
               Edit
             </Button>
+            </Link>
           )}
         </Stack>
       </div>

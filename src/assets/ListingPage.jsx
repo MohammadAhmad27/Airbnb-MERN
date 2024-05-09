@@ -13,7 +13,6 @@ const ListingPage = () => {
     const fetchData = async () => {
       try {
         const data = await showListing(id);
-        console.log("Listing Data:", data); // Log the data received from showListing
         setListing(data);
       } catch (error) {
         console.error("Error fetching listing:", error); // Log any errors that occur

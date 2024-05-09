@@ -41,7 +41,7 @@ const ListingState = (props) => {
     }
 
     // Show Particular Listing
-    const showListing = async (id) => {
+const showListing = async (id) => {
         // API Call 
         const response = await fetch(`${host}/listings/${id}`, {
             method: 'GET',
@@ -52,8 +52,9 @@ const ListingState = (props) => {
         });
         const json = await response.json();
         console.log("Listing", json);
-        setListings(json);
-    }
+        return json; // Return the specific listing data
+}
+
 
 
     // Delete a Listing

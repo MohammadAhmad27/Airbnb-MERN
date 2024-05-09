@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import listingContext from '../context/ListingContext';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
-import { Link, useNavigate } from "react-router-dom";
 
 const ListingPage = (props) => {
   const { id } = useParams(); // Get the dynamic parameter from the URL

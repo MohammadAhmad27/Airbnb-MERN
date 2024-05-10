@@ -1,14 +1,11 @@
-if (process.env.NODE_ENV != "production") {
-    require('dotenv').config();
-}
+// if (process.env.NODE_ENV != "production") {
+//     require('dotenv').config();
+// }
 const express = require('express')
 const mongoose = require("mongoose");
 var cors = require('cors')
-const Listing = require("./models/listing.js")
 const listingRouter = require("./routes/listing.js")
 const userRouter = require("./routes/user.js")
-const methodOverride = require("method-override")
-const path = require("path")
 const app = express()
 const port = 8000
 
@@ -29,7 +26,6 @@ async function main() {
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
 
 
 // Requiring listing.js & user.js from routes folder

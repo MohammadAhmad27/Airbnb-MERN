@@ -41,7 +41,7 @@ const ListingState = (props) => {
     }
 
     // Show Particular Listing
-const showListing = async (id) => {
+    const showListing = async (id) => {
         // API Call 
         const response = await fetch(`${host}/listings/${id}`, {
             method: 'GET',
@@ -54,7 +54,7 @@ const showListing = async (id) => {
         console.log("Listing", json);
         // setListings(json);
         return json; // Return the specific listing data
-}
+    }
 
 
 
@@ -86,7 +86,7 @@ const showListing = async (id) => {
             body: JSON.stringify({ title, description, image, price, location, country })
         });
         const json = await response.json();
-        console.log("Edited Listing", json);
+        console.log("Updated Listing", json);
         let newListings = JSON.parse(JSON.stringify(listings));
         // Logic to edit in client
         for (let index = 0; index < newListings.length; index++) {
@@ -102,6 +102,7 @@ const showListing = async (id) => {
             }
         }
         setListings(newListings);
+        console.log("After Updation (All Listings)!", newListings)
     }
 
     return (

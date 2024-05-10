@@ -2,25 +2,39 @@
 #filters {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    margin-left: 25rem;
-    width: 77rem;
+    justify-content: center; /* Center the icons horizontally */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 77rem; /* Set maximum width for the container */
 }
 
 .filter {
     text-align: center;
     margin-right: 2rem;
     margin-top: 1.25rem;
-    opacity: 0.7
+    opacity: 0.7;
 }
 
 .filter:hover {
     opacity: 1;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .filter p {
     font-size: 0.8rem;
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 768px) {
+  #filters {
+    margin-left: 1rem; /* Adjust margin for smaller screens */
+    margin-right: 1rem;
+    max-width: none; /* Remove max-width for smaller screens */
+  }
+
+  .filter {
+    margin-right: 1rem; /* Adjust margin for smaller screens */
+  }
 }
 
 

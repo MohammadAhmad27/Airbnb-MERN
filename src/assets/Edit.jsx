@@ -1,29 +1,46 @@
-import React, { useContext, useState } from 'react'
-import { useParams,useNavigate } from 'react-router-dom';
-import listingContext from "../context/ListingContext"
-
+import React, { useContext, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import listingContext from "../context/ListingContext";
 
 const Edit = (props) => {
     const { id } = useParams(); // Get the dynamic parameter from the URL
     console.log("Listing ID:", id); // Log the id to ensure it's correct
     const context = useContext(listingContext);
-    const { editListing } = context;
+    const { showListing, editListing } = context;
     const [listing, setListing] = useState({ id: "", etitle: "", edescription: "", eimage: "", eprice: "", elocation: "", ecountry: "" });
     const navigate = useNavigate();
 
-    const handleSubmit = (e, currentListing) => {
+    useEffect(() => {
+        const fetchListing = async () => {
+            try {
+                const currentListing = await showListing(id);
+                setListing({
+                    id: currentListing._id,
+                    etitle: currentListing.title,
+                    edescription: currentListing.description,
+                    eimage: currentListing.image,
+                    eprice: currentListing.price,
+                    elocation: currentListing.location,
+                    ecountry: currentListing.country
+                });
+            } catch (error) {
+                console.error("Error fetching listing:", error);
+            }
+        };
+
+        fetchListing();
+    }, [id, showListing]);
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        editListing(listing.etitle, listing.edescription, listing.eimage, listing.eprice, listing.elocation, listing.ecountry);
-        setListing({ id: currentListing._id, etitle: currentListing.title, edescription: currentListing.description, eimage: currentListing.image, eprice: currentListing.price, elocation: currentListing._location, ecountry: currentListing.country });
-        navigate(`/showlisting/${listing._id}`);
+        editListing(listing.id, listing.etitle, listing.edescription, listing.eimage, listing.eprice, listing.elocation, listing.ecountry);
+        navigate(`/showlisting/${listing.id}`);
         props.showAlert("Listing Edited Successfully!", "success");
-        console.log("button clicked")
     };
 
     const onChange = (e) => {
         setListing({ ...listing, [e.target.name]: e.target.value });
     };
-
 
     return (
         <>
@@ -39,16 +56,12 @@ const Edit = (props) => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <textarea id="description" cols="30" rows="10" name="edescription" value={listing.edescription} onChange={onChange} placeholder="Enter your description" className="form-control" required></textarea>
+                            <textarea cols="30" rows="10" id="description" name="edescription" value={listing.edescription} onChange={onChange} placeholder="Enter your description" className="form-control" required></textarea>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="image" className="form-label">Image Link</label>
                             <input type="text" id="image" name="eimage" value={listing.eimage} onChange={onChange} placeholder="Enter image URL/Link" className="form-control" minLength={15} required />
                         </div>
-                        {/* <div className="mb-3">
-                            <label htmlFor="image" className="form-label">Uploading Listing Image</label>
-                            <input type="file" id="image" name="image" className="form-control" required />
-                        </div> */}
                         <div className="row">
                             <div className="mb-3 col-md-4">
                                 <label htmlFor="price" className="form-label">Price</label>
@@ -72,7 +85,7 @@ const Edit = (props) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Edit
+export default Edit;

@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 // const upload = multer({ storage })
 
 
-//Home route where all listings are showing
+//GET Route where all listings are showing
 //Successfully tested using Thunder Client
 router.get("/", async (req, res) => {
     try {
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-//Home route where new listing will be shown after creating
+//POST Route where new listing will be shown after creation
 //Successfully tested using Thunder Client
 //upload.single("listing[image]")
 router.post("/", fetchUser, [
@@ -54,24 +54,15 @@ router.post("/", fetchUser, [
     }
 });
 
-// Rendering/Showing Form for creating new listing
-// Successfully tested using Thunder Client
-router.get("/new", (req, res) => {
-    console.log(req.user);
-    res.send(req.user);
-    // res.render("new.ejs"); 
-});
 
-
-// Rendering Show listing code page
-// Successfully tested using Thunder Client
+//GET Route where particular listing details will be shown
+//Successfully tested using Thunder Client
 router.get("/:id", async (req, res) => {
     try {
         let { id } = req.params;
         const listing = await Listing.findById(id);
         console.log(listing);
         res.send(listing)
-        // res.render("show.ejs", { listing });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Sorry, Internal server error!" });
@@ -79,7 +70,7 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// Updating Listing Code
+// PUT Route to Editing listing details
 // Successfully tested using Thunder Client, got some error
 router.put("/:id", fetchUser, async (req, res) => {
     const { title, description, image, price, location, country } = req.body;
@@ -113,7 +104,7 @@ router.put("/:id", fetchUser, async (req, res) => {
 });
 
 
-// Deleting Listing Code
+// DELETE Route to deleting a listing 
 // Successfully tested using Thunder Client
 router.delete("/:id", fetchUser, async (req, res) => {
     try {
@@ -121,34 +112,19 @@ router.delete("/:id", fetchUser, async (req, res) => {
         let { id } = req.params;
         let deletedListing = await Listing.findById(id);
         if (!deletedListing) { return res.status(404).send("Not Found") }
-        // Allow deletion only if user owns this Note
+        // Allow deletion only if user owns this listing
         if (deletedListing.user.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
         //delete via id
         deletedListing = await Listing.findByIdAndDelete(id)
         res.send({ "Success": "Lisitng has been deleted", deletedListing: deletedListing });
-        // res.redirect("/listings");
     }
     catch (error) {
         console.error(error);
         res.status(500).json({ error: "Sorry, Internal server error!" });
     }
 });
-
-
-// Edit Form Code
-router.get("/:id/edit", async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
-    // res.render("edit.ejs", { listing, originalImageUrl });
-});
-
-
-
-
 
 
 module.exports = router;

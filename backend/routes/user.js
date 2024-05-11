@@ -9,7 +9,7 @@ const fetchUser = require('../middleware/fetchUser');
 
 const JWT_SECRET = 'Ahmadisagoodb$oy';
 
-// ROUTE 1: Create a New User using: POST "/api/auth/createuser". No login required
+// ROUTE 1: Create a New User using: POST "/createuser".
 //Successfully tested using Thunder Client
 router.post('/createuser', [
   body('name', 'Enter a valid name').isLength({ min: 3 }),
@@ -23,7 +23,7 @@ router.post('/createuser', [
     return res.status(400).json({ success, errors: errors.array() });
   }
   try {
-    // Check whether the user with this email exists already
+    // Check whether the user with this email already exists 
     let user = await User.findOne({ email: req.body.email });
     if (user) {
       return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
@@ -44,8 +44,6 @@ router.post('/createuser', [
     }
     const authtoken = jwt.sign(data, JWT_SECRET);
 
-
-    // res.json(user)
     success = true;
     res.json({ success, authtoken })
 
@@ -56,7 +54,7 @@ router.post('/createuser', [
 })
 
 
-// ROUTE 2: Authenticate an Existing User using: POST "/api/auth/login". No login required
+// ROUTE 2: Authenticate an Existing User using: POST "/login". User must exits in database to get auth-token
 //Successfully tested using Thunder Client
 router.post('/login', [
   body('email', 'Enter a valid email').isEmail(),
@@ -101,7 +99,7 @@ router.post('/login', [
 });
 
 
-// ROUTE 3: Get Existing User Details using: POST "/api/auth/getuser". Login required
+// ROUTE 3: Get Existing User Details using: POST "/getuser". User must exits in database to see details
 //Successfully tested using Thunder Client
 router.post('/getuser', fetchUser, async (req, res) => {
 

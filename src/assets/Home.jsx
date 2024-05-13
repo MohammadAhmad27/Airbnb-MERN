@@ -1,21 +1,21 @@
-import Header from "./Header"
-import Footer from './Footer'
-import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Header from "./Header";
+import Footer from "./Footer";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import listingContext from "../context/ListingContext";
-import ListingItem from './ListingItem';
+import ListingItem from "./ListingItem";
 
-export default function Home(props) {
+export default function Home({ showAlert }) {
   const context = useContext(listingContext);
   const navigate = useNavigate();
   const { listings, getListings } = context;
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
-      props.showAlert(" Please Login to see All Listings!", "danger")
+      showAlert(" Please Login to see All Listings!", "danger");
     } else {
-      getListings()
+      getListings();
     }
     // eslint-disable-next-line
   }, []);
@@ -29,7 +29,6 @@ export default function Home(props) {
           <ListingItem key={listing._id} listing={listing} />
         ))}
       </div>
-
 
       <Footer />
     </>

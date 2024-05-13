@@ -1,27 +1,27 @@
 /* Header */
 #filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the icons horizontally */
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 77rem; /* Set maximum width for the container */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the icons horizontally */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 77rem; /* Set maximum width for the container */
 }
 
 .filter {
-    text-align: center;
-    margin-right: 2rem;
-    margin-top: 1.25rem;
-    opacity: 0.7;
+  text-align: center;
+  margin-right: 2rem;
+  margin-top: 1.25rem;
+  opacity: 0.7;
 }
 
 .filter:hover {
-    opacity: 1;
-    cursor: pointer;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .filter p {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 /* Adjustments for responsiveness */
@@ -37,66 +37,62 @@
   }
 }
 
-
 /* Footer */
 .socialMedia-Icons {
-    margin-right: 0.25rem;
-    cursor: pointer;
+  margin-right: 0.25rem;
+  cursor: pointer;
 }
 
 .copyright,
 .copyright-icon,
 .text {
-    font-size: smaller;
+  font-size: smaller;
 }
 
 .globe,
 .dollar {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 
 /* Cards */
 .listing-card {
-    border: none !important;
-    margin-bottom: 2rem;
+  border: none !important;
+  margin-bottom: 2rem;
 }
 
 .card-img-top {
-    border-radius: 1rem !important;
-    width: 100% !important;
-    object-fit: cover !important;
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
 }
 
 .card-body {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .card-text p {
-    font-weight: 400 !important;
-
+  font-weight: 400 !important;
 }
 
 .listing-link {
-    text-decoration: none;
+  text-decoration: none;
 }
-
 
 /* Show Page */
 .show-img {
-    height: 45vh;
+  height: 45vh;
 }
 
 .show-img:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Show Page */
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .show-card {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }

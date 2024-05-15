@@ -13,44 +13,26 @@ const ListingState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem('token')
       },
     });
     const json = await response.json();
-    console.log("All Listings", json);
-    setListings(json);
+    console.log("All Listings:", json.allListings);
+    setListings(json.allListings);
   };
 
   // Add a Listing
-  const addListing = async (
-    title,
-    description,
-    image,
-    price,
-    location,
-    country
-  ) => {
-    // TODO: API Call
-    // API Call
+  const addListing = async (formData) => {
     const response = await fetch(`${host}/listings`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({
-        title,
-        description,
-        image,
-        price,
-        location,
-        country,
-      }),
+      body: formData,
     });
 
     const listing = await response.json();
-    console.log("New Listing", listing);
-    setListings(listings.concat(listing));
+    console.log("NewListing:", listing);
+    setListings([...listings, listing]); // Append the new listing to the existing listings
   };
 
   // Show Particular Listing
@@ -60,12 +42,10 @@ const ListingState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem('token')
       },
     });
     const json = await response.json();
     console.log("Listing", json);
-    // setListings(json);
     return json; // Return the specific listing data
   };
 
@@ -79,7 +59,7 @@ const ListingState = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    const json = response.json();
+    const json = await response.json();
     console.log("Deleted Listing", json);
     const newListings = listings.filter((listing) => {
       return listing._id !== id;
@@ -97,40 +77,34 @@ const ListingState = (props) => {
     location,
     country
   ) => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (image) formData.append("image", image); // Only append if image is provided
+    formData.append("price", price);
+    formData.append("location", location);
+    formData.append("country", country);
+
     // API Call
     const response = await fetch(`${host}/listings/${id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({
-        title,
-        description,
-        image,
-        price,
-        location,
-        country,
-      }),
+      body: formData,
     });
+
     const json = await response.json();
     console.log("Updated Listing", json);
     let newListings = JSON.parse(JSON.stringify(listings));
-    // Logic to edit in client
     for (let index = 0; index < newListings.length; index++) {
       const element = newListings[index];
       if (element._id === id) {
-        newListings[index].title = title;
-        newListings[index].description = description;
-        newListings[index].image = image;
-        newListings[index].price = price;
-        newListings[index].location = location;
-        newListings[index].country = country;
+        newListings[index] = json; // Replace the updated listing
         break;
       }
     }
     setListings(newListings);
-    console.log("After Updation (All Listings)!", newListings);
   };
 
   return (
@@ -148,4 +122,5 @@ const ListingState = (props) => {
     </ListingContext.Provider>
   );
 };
+
 export default ListingState;

@@ -17,7 +17,6 @@ export default function Home({ showAlert }) {
     } else {
       getListings();
     }
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -25,7 +24,7 @@ export default function Home({ showAlert }) {
       <Header />
 
       <div className="row mx-4">
-        {listings.allListings?.map((listing) => (
+        {listings?.map((listing) => (
           <ListingItem key={listing._id} listing={listing} />
         ))}
       </div>

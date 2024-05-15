@@ -7,7 +7,7 @@ const ListingItem = ({ listing }) => {
       <Link to={`/showlisting/${listing._id}`} className="listing-link">
         <div className="card listing-card">
           <img
-            src={listing.image}
+            src={listing.image.url}
             className="card-img-top"
             alt="listing"
             style={{ height: "18rem" }}

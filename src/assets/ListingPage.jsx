@@ -21,21 +21,13 @@ const ListingPage = ({ showAlert }) => {
         const data = await showListing(id);
         setListing(data);
       } catch (error) {
-        console.error("Error fetching listing:", error); // Log any errors that occur
+        console.error("Error fetching listing:", error);
+        showAlert("Error fetching listing.", "danger");
       }
     };
     fetchData();
-  }, [id]);
+  }, []);
 
-  if (!listing) {
-    return (
-      <div>
-        <h1>Error in finding requested listing!</h1>
-      </div>
-    );
-  }
-
-  //Authentication to display DELETE & EDIT buttons only to owner of that lisitng
   const isOwner = () => {
     const token = localStorage.getItem("token");
     console.log("token", token);
@@ -64,6 +56,14 @@ const ListingPage = ({ showAlert }) => {
     return JSON.parse(jsonPayload);
   };
 
+  if (!listing) {
+    return (
+      <div>
+        <h1></h1>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="row">
@@ -72,7 +72,7 @@ const ListingPage = ({ showAlert }) => {
         </div>
         <div className="card col-6 offset-3 show-card listing-card">
           <img
-            src={listing.image}
+            src={listing.image.url}
             className="card-img-top show-img"
             alt="listing"
           />
@@ -90,25 +90,29 @@ const ListingPage = ({ showAlert }) => {
       <div className="offset-3">
         <Stack direction="row" spacing={5}>
           {isOwner() && (
-            <Button
-              variant="contained"
-              color="error"
-              startIcon={<DeleteIcon />}
-              onClick={() => {
-                deleteListing(listing._id);
-                showAlert("Listing Deleted Successfully!", "success");
-                navigate("/");
-              }}
-            >
-              Delete
-            </Button>
-          )}
-          {isOwner() && (
-            <Link to={`/editlisting/${listing._id}`}>
-              <Button variant="contained" color="error" endIcon={<EditIcon />}>
-                Edit
+            <>
+              <Button
+                variant="contained"
+                color="error"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  deleteListing(listing._id);
+                  showAlert("Listing Deleted Successfully!", "success");
+                  navigate("/");
+                }}
+              >
+                Delete
               </Button>
-            </Link>
+              <Link to={`/editlisting/${listing._id}`}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  endIcon={<EditIcon />}
+                >
+                  Edit
+                </Button>
+              </Link>
+            </>
           )}
         </Stack>
       </div>

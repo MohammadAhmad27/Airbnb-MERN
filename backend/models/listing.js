@@ -9,15 +9,14 @@ const listingSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true
     },
     description: {
         type: String,
         required: true
     },
     image: {
-        type: String,
-        required: true
+        url: String,
+        filename: String,
     },
     price: {
         type: Number,

@@ -56,12 +56,9 @@ const ListingPage = ({ showAlert }) => {
     return JSON.parse(jsonPayload);
   };
 
+  //When data takes time to fetch from backend
   if (!listing) {
-    return (
-      <div>
-        <h1></h1>
-      </div>
-    );
+    return <></>
   }
 
   return (

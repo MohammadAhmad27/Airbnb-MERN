@@ -25,8 +25,11 @@ export default function AddNewListing({ showAlert }) {
     formData.append("price", listing.price);
     formData.append("location", listing.location);
     formData.append("country", listing.country);
-
-    await addListing(formData);
+  
+    // Add the listing without waiting for its completion
+    addListing(formData);
+    navigate("/");
+    showAlert("Listing Added Successfully!", "success");
     setListing({
       title: "",
       description: "",
@@ -35,10 +38,8 @@ export default function AddNewListing({ showAlert }) {
       location: "",
       country: "",
     });
-    navigate("/");
-    showAlert("Listing Added Successfully!", "success");
   };
-
+  
   const onChange = (e) => {
     if (e.target.name === "image") {
       setListing({ ...listing, image: e.target.files[0] });

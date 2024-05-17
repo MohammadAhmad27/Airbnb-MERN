@@ -103,7 +103,7 @@ export default function AddNewListing({ showAlert }) {
           </div>
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Uploading Listing Image
+               Image
             </label>
             <input
               type="file"

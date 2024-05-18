@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import listingContext from "../context/ListingContext";
 import ListingItem from "./ListingItem";
 
-export default function Home({ showAlert }) {
+export default function Home({ showAlert, setProgress }) {
   const context = useContext(listingContext);
   const navigate = useNavigate();
   const { listings, getListings } = context;
@@ -15,7 +15,17 @@ export default function Home({ showAlert }) {
       navigate("/login");
       showAlert(" Please Login to see All Listings!", "danger");
     } else {
-      getListings();
+      const fetchListings = async () => {
+        try {
+          setProgress(20);
+          await getListings();
+          setProgress(100);
+        } catch (error) {
+          setProgress(0);
+          showAlert("Error fetching listings.", "danger");
+        }
+      };
+      fetchListings();
     }
   }, []);
 

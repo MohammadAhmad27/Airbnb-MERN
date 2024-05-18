@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import listingContext from "../context/ListingContext";
 import { useNavigate } from "react-router-dom";
 
-export default function AddNewListing({ showAlert }) {
+export default function AddNewListing({ showAlert, setProgress }) {
   const context = useContext(listingContext);
   const { addListing } = context;
   const [listing, setListing] = useState({
@@ -25,21 +25,27 @@ export default function AddNewListing({ showAlert }) {
     formData.append("price", listing.price);
     formData.append("location", listing.location);
     formData.append("country", listing.country);
-  
-    // Add the listing without waiting for its completion
-    addListing(formData);
-    navigate("/");
-    showAlert("Listing Added Successfully!", "success");
-    setListing({
-      title: "",
-      description: "",
-      image: null,
-      price: "",
-      location: "",
-      country: "",
-    });
+
+    try {
+      setProgress(20);
+      await addListing(formData);
+      setProgress(50);
+      navigate("/");
+      showAlert("Listing Added Successfully!", "success");
+      setProgress(100);
+      setListing({
+        title: "",
+        description: "",
+        image: null,
+        price: "",
+        location: "",
+        country: "",
+      });
+    } catch (error) {
+      showAlert("Error adding listing.", "danger");
+    }
   };
-  
+
   const onChange = (e) => {
     if (e.target.name === "image") {
       setListing({ ...listing, image: e.target.files[0] });
@@ -49,14 +55,13 @@ export default function AddNewListing({ showAlert }) {
   };
 
   useEffect(() => {
-    // Redirect to login page if user is not logged in
     if (!localStorage.getItem("token")) {
       navigate("/login");
       showAlert("Please Login to Add New Listing!", "danger");
     } else {
       showAlert("Please Add New Listing!", "success");
     }
-  }, []); // Run only once when component mounts
+  }, []);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -103,7 +108,7 @@ export default function AddNewListing({ showAlert }) {
           </div>
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-               Image
+              Image
             </label>
             <input
               type="file"

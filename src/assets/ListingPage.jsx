@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 
-const ListingPage = ({ showAlert }) => {
+const ListingPage = ({ showAlert, setProgress }) => {
   const { id } = useParams(); // Get the dynamic parameter from the URL
   console.log("Listing ID:", id); // Log the id to ensure it's correct
   const context = useContext(listingContext);
@@ -18,8 +18,11 @@ const ListingPage = ({ showAlert }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setProgress(20);
         const data = await showListing(id);
+        setProgress(50);
         setListing(data);
+        setProgress(100);
       } catch (error) {
         console.error("Error fetching listing:", error);
         showAlert("Error fetching listing.", "danger");
@@ -58,7 +61,7 @@ const ListingPage = ({ showAlert }) => {
 
   //When data takes time to fetch from backend
   if (!listing) {
-    return <></>
+    return <></>;
   }
 
   return (

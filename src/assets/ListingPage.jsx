@@ -67,7 +67,7 @@ const ListingPage = ({ showAlert, setProgress }) => {
   return (
     <>
       <div className="row">
-        <div className="col-8 offset-3">
+        <div className="col-8 offset-3 mt-3">
           <h3>{listing.title}</h3>
         </div>
         <div className="card col-6 offset-3 show-card listing-card">

@@ -55,11 +55,36 @@ export default function AddNewListing({ showAlert, setProgress }) {
   };
 
   useEffect(() => {
+    const handleNotLoggedIn = async () => {
+      try {
+        setProgress(20);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        navigate("/login");
+        showAlert(" Please Login to Add New Listing!", "danger");
+        setProgress(100);
+      } catch (error) {
+        setProgress(0);
+        showAlert("Error processing request.", "danger");
+      }
+    };
+
+    const Route = async () => {
+      try {
+        setProgress(20);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        navigate("/addnewlisting");
+        showAlert("Please Add New Listing!", "success");
+        setProgress(100);
+      } catch (error) {
+        setProgress(0);
+        showAlert("Error fetching listings.", "danger");
+      }
+    };
+
     if (!localStorage.getItem("token")) {
-      navigate("/login");
-      showAlert("Please Login to Add New Listing!", "danger");
+      handleNotLoggedIn();
     } else {
-      showAlert("Please Add New Listing!", "success");
+      Route();
     }
   }, []);
 

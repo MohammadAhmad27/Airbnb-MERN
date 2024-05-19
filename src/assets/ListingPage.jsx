@@ -59,6 +59,13 @@ const ListingPage = ({ showAlert, setProgress }) => {
     return JSON.parse(jsonPayload);
   };
 
+  const handleRoute = async () => {
+    setProgress(20);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    navigate(`/editlisting/${listing._id}`);
+    setProgress(100);
+  };
+
   //When data takes time to fetch from backend
   if (!listing) {
     return <></>;
@@ -103,15 +110,15 @@ const ListingPage = ({ showAlert, setProgress }) => {
               >
                 Delete
               </Button>
-              <Link to={`/editlisting/${listing._id}`}>
-                <Button
-                  variant="contained"
-                  color="error"
-                  endIcon={<EditIcon />}
-                >
-                  Edit
-                </Button>
-              </Link>
+
+              <Button
+                variant="contained"
+                color="error"
+                endIcon={<EditIcon />}
+                onClick={handleRoute}
+              >
+                Edit
+              </Button>
             </>
           )}
         </Stack>

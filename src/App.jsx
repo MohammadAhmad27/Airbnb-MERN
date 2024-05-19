@@ -29,7 +29,7 @@ function App() {
     <>
       <ListingState>
         <Router>
-          <Navbar showAlert={showAlert} />
+          <Navbar showAlert={showAlert} setProgress={setProgress} />
           <LoadingBar color="#f11946" height={3} progress={progress} />
           <div style={{ marginTop: "57px" }}></div>
           <Alert alert={alert} />

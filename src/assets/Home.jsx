@@ -11,20 +11,33 @@ export default function Home({ showAlert, setProgress }) {
   const { listings, getListings } = context;
 
   useEffect(() => {
+    const handleNotLoggedIn = async () => {
+      try {
+        setProgress(20);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        navigate("/login");
+        showAlert(" Please Login to see All Listings!", "danger");
+        setProgress(100);
+      } catch (error) {
+        setProgress(0);
+        showAlert("Error processing request.", "danger");
+      }
+    };
+
+    const fetchListings = async () => {
+      try {
+        setProgress(20);
+        await getListings();
+        setProgress(100);
+      } catch (error) {
+        setProgress(0);
+        showAlert("Error fetching listings.", "danger");
+      }
+    };
+
     if (!localStorage.getItem("token")) {
-      navigate("/login");
-      showAlert(" Please Login to see All Listings!", "danger");
+      handleNotLoggedIn();
     } else {
-      const fetchListings = async () => {
-        try {
-          setProgress(20);
-          await getListings();
-          setProgress(100);
-        } catch (error) {
-          setProgress(0);
-          showAlert("Error fetching listings.", "danger");
-        }
-      };
       fetchListings();
     }
   }, []);

@@ -2,13 +2,25 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Navbar({ showAlert }) {
+export default function Navbar({ showAlert, setProgress }) {
   const navigate = useNavigate();
-  const handleLogout = () => {
+
+  const handleLogout = async () => {
+    setProgress(20);
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Introduce a short delay
     localStorage.removeItem("token");
     showAlert("Logged out Successfully!", "success");
     navigate("/login");
+    setProgress(100);
   };
+
+  const handleNavigate = async (path) => {
+    setProgress(20);
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Introduce a short delay
+    navigate(path);
+    setProgress(100);
+  };
+
   let location = useLocation();
   return (
     <>
@@ -60,14 +72,19 @@ export default function Navbar({ showAlert }) {
 
             {!localStorage.getItem("token") ? (
               <>
-                <Link to="/login">
-                  <Button variant="contained" sx={{ mr: 1 }}>
-                    Login
-                  </Button>
-                </Link>
-                <Link to="/signup">
-                  <Button variant="contained">Signup</Button>
-                </Link>
+                <Button
+                  variant="contained"
+                  sx={{ mr: 1 }}
+                  onClick={() => handleNavigate("/login")}
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => handleNavigate("/signup")}
+                >
+                  Signup
+                </Button>
               </>
             ) : (
               <Button variant="contained" onClick={handleLogout}>

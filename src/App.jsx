@@ -2,16 +2,16 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import { useState } from "react";
-import Navbar from "./assets/Navbar";
-import Home from "./assets/Home";
-import AddNewListing from "./assets/AddNewListing";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import AddNewListing from "./components/AddNewListing";
 import ListingState from "./context/ListingState";
-import Alert from "./assets/Alert";
-import Login from "./assets/Login";
-import Signup from "./assets/Signup";
-import ListingPage from "./assets/ListingPage";
-import Edit from "./assets/Edit";
-import NotFound from "./assets/NotFound";
+import Alert from "./components/Alert";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import ListingPage from "./components/ListingPage";
+import Edit from "./components/Edit";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [alert, setAlert] = useState(null);

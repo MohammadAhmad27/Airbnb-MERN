@@ -26,7 +26,7 @@ export default function Footer() {
         />
         <div className="copyright">
           {" "}
-          <span className="copyright-icon"> &copy;</span> 2024 Airbnb, Inc.
+          <span className="copyright-icon"> &copy;</span> 2024 Wanderlust, Inc.
         </div>
         <div>
           <LanguageIcon className="globe" style={{ fontSize: "medium" }} />{" "}

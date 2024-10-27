@@ -60,5 +60,5 @@ app.use("/", userRouter);
 
 //Listening on port 8080
 app.listen(port, () => {
-    console.log(`airbnb backend is listening at http://localhost:${port}`)
+    console.log(`Wanderlust backend is listening at http://localhost:${port}`)
 })

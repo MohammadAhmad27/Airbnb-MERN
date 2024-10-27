@@ -31,7 +31,7 @@ function App() {
         <Router>
           <Navbar showAlert={showAlert} setProgress={setProgress} />
           <LoadingBar color="#f11946" height={3} progress={progress} />
-          <div style={{ marginTop: "57px" }}></div>
+          <div style={{ marginTop: "90px" }}></div>
           <Alert alert={alert} />
           <Routes>
             <Route

@@ -38,7 +38,7 @@ const Signup = ({ showAlert }) => {
 
   return (
     <div className="container mt-2">
-      <h2>Create an Account to use Airbnb</h2>
+      <h2>Create an Account to use Wanderlust</h2>
       <form onSubmit={handleSubmit}>
         <div className="my-3">
           <label htmlFor="name" className="form-label">

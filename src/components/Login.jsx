@@ -35,7 +35,7 @@ const Login = ({ showAlert }) => {
 
   return (
     <div className="container mt-2">
-      <h2>Login to Continue to Airbnb</h2>
+      <h2>Login to Continue to Wanderlust</h2>
       <form onSubmit={handleSubmit}>
         <div className="my-3">
           <label htmlFor="email" className="form-label">
